@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-docker-k8s-deployment
+spec:
+  selector:
+    matchLabels:
+      app: jenkins-docker-k8s
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: jeknkins-docker-k8s
+    spec:
+      containers:
+        - name: jenkins-docker-k8s
+          image: benisrael/jenkins-docker-k8s
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-docker-k8s-svc
+spec:
+  selector:
+    app: jenkins-docker-k8s
+  ports:
+    - protocol: "TCP"
+      port: 8080
+      targetPort: 8080
+  type: NodePort
