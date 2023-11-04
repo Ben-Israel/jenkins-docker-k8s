@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: jenkins-docker-k8s
-          image: benisrael/jenkins-docker-k8s
+          image: benisrael/jenkins-docker-k8s:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
@@ -31,7 +31,7 @@ spec:
   selector:
     app: jenkins-docker-k8s
   ports:
-    - protocol: "TCP"
+    - protocol: TCP
       port: 3000
       targetPort: 3000
   type: NodePort
